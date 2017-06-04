@@ -46,7 +46,7 @@ def ReviewAuthzViaHTTPS(authz):
 	http = urllib3.PoolManager()
 	for auth in authz:
 		print('Reviewing Auth: ' + auth)
-		server_response = http.request('GET',STAGING_CA+auth)
+		server_response = http.request('GET',PRODUCTION_CA+auth)
 		json_body = json.loads(server_response.data.decode('utf-8'))
 		if(json_body["status"] == 'pending'):
 			print('\t Status:' + json_body["status"]+' Domain: ' + json_body["identifier"]["value"] +'  Expires: ' + json_body["expires"])
