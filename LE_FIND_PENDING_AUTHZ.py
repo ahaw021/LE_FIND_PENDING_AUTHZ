@@ -10,15 +10,17 @@ from acme import messages
 from acme import jose
 from acme import challenges
 
-PATH = r"D:\var\log\letsencrypt"
-CHALLENGES_REGEX = r'(?<=letsencrypt\.org\/acme\/authz\/).+'
+PATH = r""
+KEY_FOLDER = r""
+
+CHALLENGES_REGEX = r'(?<=letsencrypt\.org\/acme\/authz\/).+?(?=\>|\s|\.)'
 SUCCESS_REGEX = r'Congratulations! Your certificate'
-LOG_CUTOFF_DAYS = dt.date.today() - dt.timedelta(days=7)
+LOG_CUTOFF_DAYS = dt.date.today() - dt.timedelta(days=30)
 PRODUCTION_CA = 'https://acme-v01.api.letsencrypt.org/'
 STAGING_CA = 'https://acme-staging.api.letsencrypt.org/'
 challenge_re = re.compile(CHALLENGES_REGEX)
 success_re = re.compile(SUCCESS_REGEX)
-KEY_FOLDER = r""
+
 KEY =""
 ACME_CLIENT = ''
 	
@@ -36,16 +38,16 @@ def ExtractAuthz(file):
 	filetext = textfile.read()
 	textfile.close()
 	matches = re.findall(success_re, filetext)
-	#print('\nAnalysing File: ' + file +'\n')
+	print('\nAnalysing File: ' + file +'\n')
 	
 	if(len(matches) >= 1):
-		#print('\tFound matches for Success Regex'+ '\n' + '\tNot Analyzing For Pending Authz\n')
+		print('\tFound matches for Success Regex'+ '\n' + '\tNot Analyzing For Pending Authz\n')
 		return []
 		
 	else:
-		#print('\tFound: no matches for Success Regex' + '\n' + '\tAnalyzing For Pending Authz\n')
+		print('\tFound: no matches for Success Regex' + '\n' + '\tAnalyzing For Pending Authz\n')
 		matches = re.findall(challenge_re,filetext)
-		#print('\tFound : ' + str(len(matches)) + ' Authz in file \n') 
+		print('\tFound : ' + str(len(matches)) + ' Authz in file \n') 
 		return matches
 		
 def ReviewAuthzViaHTTPS(authz):
@@ -85,5 +87,3 @@ for files in os.listdir(PATH):
 	if(FirstFilePass(files)):
 		authz = ExtractAuthz(files)
 		ReviewAuthzViaHTTPS(authz)
-
-
