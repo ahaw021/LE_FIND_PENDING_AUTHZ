@@ -7,8 +7,9 @@ The Usage of the script should be pretty straight forward.
 
 The Script requires two paramaters which are defined at the top
 
-PATH: the path to the log directory for Let's Encrypt - usually this is is /var/log/letsencrypt
-KEY FOLDER - folder for Let's Encrypt Account Key. Usually /etc/letsencrypt/accounts/<random numbers and letters>
+**PATH:** the path to the log directory for Let's Encrypt - usually this is is /var/log/letsencrypt
+
+**KEY FOLDER** - folder for Let's Encrypt Account Key. Usually /etc/letsencrypt/accounts/<random numbers and letters>
 
 # TODO: 
 
