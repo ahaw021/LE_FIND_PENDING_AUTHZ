@@ -10,8 +10,14 @@ from acme import messages
 from acme import jose
 from acme import challenges
 
+# UPDATE THESE for the Script to work
+#PATH - path to Let's Encrypt Logs folder. by default /var/log/letsencrypt
+#KEY FOLDER - folder for Let's Encrypt Account Key. Usually /etc/letsencrypt/accounts/acme-v01.api.letsencrypt.org/directory/<random numbers and letters>
+
 PATH = r""
 KEY_FOLDER = r""
+
+#DO NOT TOUCH PARAMETERS BELOW UNLESS YOU ARE CONFIDENT OF THEIR FUNCTIONING
 
 CHALLENGES_REGEX = r'(?<=letsencrypt\.org\/acme\/authz\/).+?(?=\>|\s|\.)'
 SUCCESS_REGEX = r'Congratulations! Your certificate'
